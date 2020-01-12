@@ -1,6 +1,6 @@
 const config = {
-    ApplicationId: '<YOURTRAVELTIMEAPPID>',
-    ApiKey: '<YOURTRAVELTIMEAPIKEY>',
+    ApplicationId: 'c69bf4ca',
+    ApiKey: '91a307834bfc976b3957212b74b98d42',
 
     maxTravelTime: 2400,
 
@@ -11,7 +11,7 @@ const config = {
     },
 
     targetLoc: {
-        lat: 50,
-        lng: -0.1
+        lat: 51.523361,
+        lng: -0.083068
     }
 };
