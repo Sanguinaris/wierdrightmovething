@@ -128,8 +128,6 @@ for(let i = 0; i < props.length; ++i)
     locationsArr.push(addy[0].textContent)
 }
 
-console.log(locationsArr)
-
 let gudResults = undefined;
 
 async function DoTheNeedful()
@@ -141,9 +139,7 @@ async function DoTheNeedful()
     }});
     const result = await testFetch(locs);
     gudResults = result.results[0].locations;
-    console.log(gudResults);
     FuckUpHtml(gudResults);
 }
 
-DoTheNeedful().then(() => console.log('we done here'))
-
+DoTheNeedful()
