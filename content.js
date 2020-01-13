@@ -144,11 +144,13 @@ async function DoTheNeedful()
     FuckUpHtml(gudResults);
 }
 
-chrome.storage.local.get(['lat', 'lng'], (res) => {
+chrome.storage.local.get(['lat', 'lng', 'maxtime'], (res) => {
     if(res.lat)
         config.targetLoc.lat = parseFloat(res.lat);
     if(res.lng)
         config.targetLoc.lng = parseFloat(res.lng);
-});
+    if(res.maxtime)
+        config.maxTravelTime = parseInt(res.maxtime);
 
-DoTheNeedful()
+    DoTheNeedful()
+});
