@@ -8,8 +8,10 @@ const authHeaders = {
 async function ResolvePlace(placeName)
 {
     const respo = await fetch(`https://api.traveltimeapp.com/v4/geocoding/search?query=${placeName}&focus.lat=${config.focusLoc.lat}&focus.lng=${config.focusLoc.lng}`, {method: 'GET', headers: authHeaders });
-    if(!respo.ok)
+    if(!respo.ok){
+        console.log(await respo.text());
         return null;
+    }
 
     return await respo.json();
 }
@@ -59,7 +61,8 @@ async function testFetch(locations)
     const ret = await fetch('https://api.traveltimeapp.com/v4/time-filter/fast', 
     {method: 'POST', headers: authHeaders, body: JSON.stringify(reqBody)});
     if(ret.ok) return await ret.json();
-    return null; 
+    console.log(await ret.text());
+    return null;
 }
 
 function ShitCanProperty(property)
@@ -104,8 +107,6 @@ function GudBoiPropertyNice(property, time)
     property.onmouseenter = GudBoiOnMouseOver;
 }
 
-
-
 function FuckUpHtml(result)
 {
     for(let i = 0; i < props.length; ++i)
@@ -138,8 +139,16 @@ async function DoTheNeedful()
         'lng': config.targetLoc.lng
     }});
     const result = await testFetch(locs);
+    if(!result) alert('uwu fucky wucky');
     gudResults = result.results[0].locations;
     FuckUpHtml(gudResults);
 }
+
+chrome.storage.local.get(['lat', 'lng'], (res) => {
+    if(res.lat)
+        config.targetLoc.lat = parseFloat(res.lat);
+    if(res.lng)
+        config.targetLoc.lng = parseFloat(res.lng);
+});
 
 DoTheNeedful()
